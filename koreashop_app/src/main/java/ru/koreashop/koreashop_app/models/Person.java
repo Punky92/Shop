@@ -2,13 +2,12 @@ package ru.koreashop.koreashop_app.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name = "user")
-public class User {
+@Table(name = "person")
+public class Person {
 
     @Id
     @Column(name = "id")
@@ -18,32 +17,32 @@ public class User {
     @Column(name = "role")
     private String role;
 
-    @NotEmpty(message = "Email should not be empty")
-    @Email(message = "Email is not specified correctly")
+    @NotEmpty(message = "Поле email не должно быть пустым")
+    @Email(message = "Email адрес указан не корректно")
     @Column(name = "email")
     private String email;
 
-    @NotEmpty(message = "Password should not be empty")
-    @Min(value = 6, message = "The password must contain at least six characters")
+    @NotEmpty(message = "Поле 'пароль' не должно быть пустым")
+    @Size(min = 6, message = "Пароль должен содержать не менее 6 символов")
     @Column(name = "password")
     private String password;
 
-    @Size(min = 2, max = 30, message = "The name must be between 2 and 30 characters")
+    @Size(min = 2, max = 30, message = "Имя должно быть от 2 до 30 символов длинной")
     @Column(name = "name")
     private String name;
 
-    @Size(min = 2, max = 30, message = "The surname must be between 2 and 30 characters")
+    @Size(min = 2, max = 30, message = "Фамилия должна быть от 2 до 30 символов длинной")
     @Column(name = "surname")
     private String surname;
 
-    //TODO Сделать выборку пола в форме?
+    // TODO Сделать выборку пола в форме?
     @Column(name = "gender")
     private String gender;
 
-    //TODO Сделать выборку дня рождения из календаря?
+    // TODO Сделать выборку дня рождения из календаря?
     //@Temporal(TemporalType.DATE) Для отоброжения даты
     //@DateTimeFormat(pattern = "dd/MM/yyyy") - для нужного отображения даты
-    @Size(max = 4, message = "The year of birth must be no more than 4 digits")
+    //@Size(max = 4, message = "Год рождения должен содержать 4 цифры")
     @Column(name = "year_of_birth")
     private int yearOfBirth;
 
@@ -52,14 +51,14 @@ public class User {
     private int phoneNumber;
 
     //TODO Сделать выборку городов в форме?
-    @Size(min = 2, max = 30, message = "The city must be between 2 and 30 characters")
+    @Size(min = 2, max = 30, message = "Название города должно быть от 2 до 30 символов длинной")
     @Column(name = "city")
     private String city;
 
-    public User() {
+    public Person() {
     }
 
-    public User(String email, String password) {
+    public Person(String email, String password) {
         this.email = email;
         this.password = password;
     }
