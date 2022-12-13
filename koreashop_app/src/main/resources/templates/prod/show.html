@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Описание товара</title>
+</head>
+<body>
+
+<p th:text="${product.getTitle() + ', ' + product.getDescription() + ', ' + product.getPrice()}">value</p>
+
+<hr/>
+
+<form th:action="@{/prod/{id}/edit(id=${product.getId()})}">
+  <input type="submit" value="Редактировать">
+</form>
+
+<br/>
+
+<form th:method="DELETE" th:action="@{/prod/{id}(id=${product.getId()})}">
+  <input type="submit" value="Удалить">
+</form>
+
+
+</body>
+</html>

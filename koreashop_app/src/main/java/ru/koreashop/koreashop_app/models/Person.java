@@ -46,11 +46,11 @@ public class Person {
     @Column(name = "year_of_birth")
     private int yearOfBirth;
 
-    //TODO Сделать валидацию для номера телефона (сделать в форме)
+    // TODO Сделать валидацию для номера телефона (сделать в форме)
     @Column(name = "phone_number")
     private int phoneNumber;
 
-    //TODO Сделать выборку городов в форме?
+    // TODO Сделать выборку городов в форме?
     @Size(min = 2, max = 30, message = "Название города должно быть от 2 до 30 символов длинной")
     @Column(name = "city")
     private String city;
