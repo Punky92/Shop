@@ -21,6 +21,7 @@ public class PersonDetailsService implements UserDetailsService {
         this.peopleRepository = peopleRepository;
     }
 
+    //Метод для поиска Username(в данном случае email) при аутентификации
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Optional<Person> person = peopleRepository.findByEmail(email);

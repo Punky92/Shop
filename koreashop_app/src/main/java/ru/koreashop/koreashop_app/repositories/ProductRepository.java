@@ -9,6 +9,7 @@ import java.util.List;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 
+    //TODO Определиться с методом поиска продукта
     List<Product> findByTitleStartingWith(String title);
     List<Product> findByTitleContainingIgnoreCase(String title);
 }

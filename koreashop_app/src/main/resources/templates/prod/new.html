@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Добавление нового товара</title>
 </head>
 <body>
 
-<form method="POST" th:action="@{/prod}" th:object="${product}">
+<form method="POST" th:action="@{/prod}" th:object="${product}" enctype="multipart/form-data"> <!--enctype="multipart/form-data" означает что форма может принимать еще и картинки и т.д -->
     <label for="title">Введите название товара: </label>
     <input type="text" th:field="*{title}" id="title">
     <div style="color: red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title error</div>
@@ -18,6 +18,15 @@
     <label for="price">Введите цену товара: </label>
     <input type="text" th:field="*{price}" id="price">
     <div style="color: red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Price error</div>
+    <br/>
+    <label for="file1">Добавьте картинку на превью: </label>
+    <input type="file"  id="file1" name="file1">
+    <br/>
+    <label for="file2">Добавьте картинку на превью: </label>
+    <input type="file"  id="file2" name="file2">
+    <br/>
+    <label for="file3">Добавьте картинку на превью: </label>
+    <input type="file"  id="file3" name="file3">
     <br/>
     <input type="submit" value="Добавить!">
 </form>

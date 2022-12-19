@@ -25,16 +25,19 @@ public class AuthController {
         this.personValidator = personValidator;
     }
 
-    @GetMapping("/login") //Метод для аутентификации
+    //Метод для аутентификации
+    @GetMapping("/login")
     public String loginPage() {
         return "auth/login";
     }
 
+    //Метод на форму регистрации
     @GetMapping("/registration")
     public String registrationPage(@ModelAttribute("person") Person person) {
         return "auth/registration";
     }
 
+    //Метод регистрации
     @PostMapping("/registration")
     public String performRegistration(@ModelAttribute("person") @Valid Person person,
                                       BindingResult bindingResult) {

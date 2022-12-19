@@ -22,6 +22,7 @@ public class SecurityConfig {
         this.personDetailsService = personDetailsService;
     }
 
+    //Настройки авторизации и аутентификации
     @Bean
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
 
@@ -48,6 +49,7 @@ public class SecurityConfig {
         authenticationManagerBuilder.userDetailsService(personDetailsService);
     }
 
+    //Шифрование паролей
     @Bean
     public PasswordEncoder getPasswordEncoder() {
         return new BCryptPasswordEncoder();

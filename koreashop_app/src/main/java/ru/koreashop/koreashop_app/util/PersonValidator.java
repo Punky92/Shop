@@ -29,7 +29,7 @@ public class PersonValidator implements Validator {
         try {
             personDetailsService.loadUserByUsername(person.getEmail());
         } catch (UsernameNotFoundException ignored) {
-            // TODO исправить строку ниже?
+            //TODO исправить строку ниже?
             return; //всё ок, пользователь найден (плохой код !!!)
         }
         errors.rejectValue("email", "", "Человек с таким email уже существует");

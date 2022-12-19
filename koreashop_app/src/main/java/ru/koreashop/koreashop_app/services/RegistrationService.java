@@ -18,6 +18,7 @@ public class RegistrationService {
     }
 
 
+    //Регистрация
     @Transactional
     public void register(Person person) {
         String encodedPassword = passwordEncoder.encode(person.getPassword()); // шифруем пароль
