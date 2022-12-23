@@ -22,7 +22,7 @@ public class ProductController {
     }
 
     //Получаем все продукты и передаём на представление
-    @GetMapping()
+    @GetMapping("/index")
     public String index(Model model) {
         model.addAttribute("products", productService.findAll());
         return "prod/index";
@@ -48,7 +48,7 @@ public class ProductController {
     public String createProduct(@RequestParam("file1") MultipartFile file1, @RequestParam("file2") MultipartFile file2,
                                 @RequestParam("file3") MultipartFile file3, Product product) throws IOException {
         productService.save(product, file1, file2, file3);
-        return "redirect:/prod";
+        return "redirect:/prod/index";
     }
 
     //Метод на форму редактирования продукта
@@ -62,14 +62,14 @@ public class ProductController {
     @PatchMapping("/{id}")
     public String updateProduct(@PathVariable("id") int id, @ModelAttribute("product") Product product) {
         productService.update(id, product);
-        return "redirect:/prod";
+        return "redirect:/prod/index";
     }
 
     //Метод удаления продукта
     @DeleteMapping("/{id}")
     public String deleteProduct(@PathVariable("id") int id) {
         productService.delete(id);
-        return "redirect:/prod";
+        return "redirect:/prod/index";
     }
 
     //Метод на форму поиска продукта

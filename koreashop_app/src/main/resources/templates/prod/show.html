@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="UTF-8">
     <title>Описание товара</title>
@@ -14,16 +14,17 @@
 
 <hr/>
 
-<form th:action="@{/prod/{id}/edit(id=${product.getId()})}">
+<form sec:authorize="hasRole('ROLE_ADMIN')" th:action="@{/prod/{id}/edit(id=${product.getId()})}">
   <input type="submit" value="Редактировать">
 </form>
 
 <br/>
 
-<form th:method="DELETE" th:action="@{/prod/{id}(id=${product.getId()})}">
+<form sec:authorize="hasRole('ROLE_ADMIN')" th:method="DELETE" th:action="@{/prod/{id}(id=${product.getId()})}">
   <input type="submit" value="Удалить">
 </form>
 
+<form action="/prod/index"> <input type="submit" value="Назад" /></form>
 
 </body>
 </html>

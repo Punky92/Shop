@@ -1,14 +1,17 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="UTF-8">
     <title>Главная страница</title>
 </head>
 <body>
 
+<form sec:authorize="!isAuthenticated()" action="/auth/login"> <input type="submit" value="Войти" /></form>
+<form sec:authorize="isAuthenticated()" th:action="@{/logout}" th:method="POST"> <input type="submit" value="Выйти" /></form>
+<form action="/auth/registration"> <input type="submit" value="Зарегистрироваться" /></form>
+<form action="/prod/search"> <input type="submit" value="Поиск товара" /></form>
+
 <div th:each="product : ${products}">
-
-
     <b th:text="${product.getId() + ', ' + product.getTitle()}">Продукт</b>
     <span th:text="${product.getDescription() + ', ' + product.getPrice()}">Продукт</span>
     <a th:href="@{/prod/{id}(id=${product.getId()})}">| Подробнее...</a>
@@ -16,7 +19,9 @@
 <br/>
 <hr/>
 
+<div sec:authorize="hasRole('ROLE_ADMIN')">
 <a href="/prod/new">Добавить продукт</a>
+</div>
 
 </body>
 </html>
