@@ -64,7 +64,10 @@ public class ProductService {
     //Обновление продукта(редактирование)
     @Transactional
     public void update(int id, Product updatedProduct) {
+        Product product = productRepository.findById(id).get();
         updatedProduct.setId(id);
+        updatedProduct.setDateOfCreated(product.getDateOfCreated());  // Пересохраняю дату создания, так как не передаю ее в форме обновления (без этого, поле стало бы null)
+        updatedProduct.setPreviewImageId(product.getPreviewImageId()); // Пересохраняю id превью-картинки, так как не передаю ее в форме обновления (без этого, поле стало бы null)
         productRepository.save(updatedProduct);
     }
 

@@ -29,7 +29,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests() //Настройка авторизации
                 .requestMatchers("/prod/new", "/prod/{id}/edit").hasRole("ADMIN") // На данные страницы могут войти только пользователи с ролью ADMIN
-                .requestMatchers("/prod/index", "/prod/{id}", "/prod/search", "/images/**", "/auth/login", "/auth/registration", "/error").permitAll() //Запросы доступные для любого пользователя
+                .requestMatchers("/prod/index", "/prod/{id}", "/prod/search", "/images/**", "/css/**", "/auth/login", "/auth/registration", "/error").permitAll() //Запросы доступные для любого пользователя
                 .anyRequest().hasAnyRole("USER", "ADMIN")//Остальные запросы доступны только для этих ролей
                 .and()
                 .formLogin().loginPage("/auth/login") //путь к нашей странице с аутентификацией
