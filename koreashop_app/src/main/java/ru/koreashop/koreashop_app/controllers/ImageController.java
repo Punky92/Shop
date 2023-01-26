@@ -22,9 +22,9 @@ public class ImageController {
         this.imageRepository = imageRepository;
     }
 
-    //??? Метод который достает из БД изображение и показывает в представлении
+    //Метод достает из БД изображение и передаёт в представлении
     @GetMapping("/images/{id}")
-    private ResponseEntity<?> getImageById(@PathVariable int id) {
+    private ResponseEntity<?> getImageById(@PathVariable Long id) {
         Image image = imageRepository.findById(id).orElse(null);
         return ResponseEntity.ok()
                 .header("fileName", image.getOriginalFileName())

@@ -40,6 +40,12 @@
                 <li class="nav-item">
                     <form action="/prod/search"><input class="btn btn-dark" type="submit" value="Поиск товара"/></form>
                 </li>
+                <li class="nav-item">
+                    <form sec:authorize="isAuthenticated()" th:action="@{/cart/getCartById}"
+                          th:object="${cart}">
+                        <input class="btn btn-dark" type="submit" value="Корзина">
+                    </form>
+                </li>
             </ul>
         </div>
     </nav>
@@ -57,6 +63,10 @@
                     <div class="card-footer">
                         <a th:href="@{/prod/{id}(id=${product.getId()})}">| Подробнее...</a>
                     </div>
+                    <form sec:authorize="isAuthenticated()" method="POST"
+                          th:action="@{/cartDetail/add/{id}(id=${product.getId()})}" th:object="${product}">
+                        <input class="btn btn-primary btn-sm" type="submit" value="Добавить в корзину!">
+                    </form>
                 </div>
             </div>
         </div>

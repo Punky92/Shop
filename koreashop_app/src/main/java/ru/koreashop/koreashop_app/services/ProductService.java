@@ -23,14 +23,14 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    // TODO возможно нужна будет сортировка и пагинация(если товара будет много)
+    //TODO возможно нужна будет сортировка и пагинация(если товара будет много)
     //Список всех продуктов
     public List<Product> findAll() {
         return productRepository.findAll();
     }
 
-    //Конктретный продукт по id
-    public Product findById(int id) {
+    //Поиск продукта по id
+    public Product findById(Long id) {
         Optional<Product> foundProduct = productRepository.findById(id);
         return foundProduct.orElse(null);
     }
@@ -63,7 +63,7 @@ public class ProductService {
 
     //Обновление продукта(редактирование)
     @Transactional
-    public void update(int id, Product updatedProduct) {
+    public void update(Long id, Product updatedProduct) {
         Product product = productRepository.findById(id).get();
         updatedProduct.setId(id);
         updatedProduct.setDateOfCreated(product.getDateOfCreated());  // Пересохраняю дату создания, так как не передаю ее в форме обновления (без этого, поле стало бы null)
@@ -73,7 +73,7 @@ public class ProductService {
 
     //Удаление продукта
     @Transactional
-    public void delete(int id) {
+    public void delete(Long id) {
         productRepository.deleteById(id);
     }
 
@@ -82,7 +82,7 @@ public class ProductService {
         return productRepository.findByTitleContainingIgnoreCase(query);
     }
 
-    //Метод для преобразование картинки к модели Image
+    //Вспомогательный метод для преобразование картинки к модели Image
     private Image toImageEntity(MultipartFile file) throws IOException {
         Image image = new Image();
         image.setName(file.getName());

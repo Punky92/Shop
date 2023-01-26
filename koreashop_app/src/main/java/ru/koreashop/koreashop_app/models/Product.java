@@ -13,7 +13,7 @@ public class Product {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Column(name = "title")
     private String title;
@@ -27,9 +27,14 @@ public class Product {
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<Image> images = new ArrayList<>();
 
-    private int previewImageId;
+    @Column(name = "preview_image_id")
+    private Long previewImageId;
 
+    @Column(name = "date_of_created")
     private LocalDateTime dateOfCreated;
+
+    @OneToMany(mappedBy = "product")
+    private List<CartDetail> cartDetails;
 
     public Product() {
     }
@@ -41,11 +46,11 @@ public class Product {
         this.images = new ArrayList<>();  //инициализация списка картинок в конструкторе, иначе при попытке добавить в список будет NullPointerException
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -81,11 +86,11 @@ public class Product {
         this.images = images;
     }
 
-    public int getPreviewImageId() {
+    public Long getPreviewImageId() {
         return previewImageId;
     }
 
-    public void setPreviewImageId(int previewImageId) {
+    public void setPreviewImageId(Long previewImageId) {
         this.previewImageId = previewImageId;
     }
 
@@ -95,6 +100,14 @@ public class Product {
 
     public void setDateOfCreated(LocalDateTime dateOfCreated) {
         this.dateOfCreated = dateOfCreated;
+    }
+
+    public List<CartDetail> getCartDetails() {
+        return cartDetails;
+    }
+
+    public void setCartDetails(List<CartDetail> cartDetails) {
+        this.cartDetails = cartDetails;
     }
 
     @PrePersist  //@PrePersist — аннотация используется для указания метода обратного вызова, который срабатывает до того, как объект будет сохранен.

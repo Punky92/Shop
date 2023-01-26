@@ -12,7 +12,7 @@ public class Person {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Column(name = "role")
     private String role;
@@ -35,11 +35,11 @@ public class Person {
     @Column(name = "surname")
     private String surname;
 
-    // TODO Сделать выборку пола в форме?
+    //TODO Сделать выборку пола в форме?
     @Column(name = "gender")
     private String gender;
 
-    // TODO Сделать выборку дня рождения из календаря?
+    //TODO Сделать выборку дня рождения из календаря?
     //@Temporal(TemporalType.DATE) Для отоброжения даты
     //@DateTimeFormat(pattern = "dd/MM/yyyy") - для нужного отображения даты
     //@Size(max = 4, message = "Год рождения должен содержать 4 цифры")
@@ -55,6 +55,9 @@ public class Person {
     @Column(name = "city")
     private String city;
 
+    @OneToOne(mappedBy = "person")
+    private Cart cart;
+
     public Person() {
     }
 
@@ -63,11 +66,11 @@ public class Person {
         this.password = password;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -141,5 +144,13 @@ public class Person {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
     }
 }

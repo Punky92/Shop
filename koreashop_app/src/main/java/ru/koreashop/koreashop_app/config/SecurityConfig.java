@@ -25,7 +25,7 @@ public class SecurityConfig {
     //Настройки авторизации и аутентификации
     @Bean
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
-// TODO Корректно настроить доступы по ролям (уменьшить код)
+//TODO Корректно настроить доступы по ролям (уменьшить код)
         http
                 .authorizeHttpRequests() //Настройка авторизации
                 .requestMatchers("/prod/new", "/prod/{id}/edit").hasRole("ADMIN") // На данные страницы могут войти только пользователи с ролью ADMIN

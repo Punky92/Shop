@@ -7,7 +7,7 @@ import ru.koreashop.koreashop_app.models.Person;
 import java.util.Optional;
 
 @Repository
-public interface PeopleRepository extends JpaRepository<Person, Integer> {
+public interface PeopleRepository extends JpaRepository<Person, Long> {
 
     Optional<Person> findByEmail(String email);
 }

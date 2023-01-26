@@ -7,7 +7,7 @@ import ru.koreashop.koreashop_app.models.Product;
 import java.util.List;
 
 @Repository
-public interface ProductRepository extends JpaRepository<Product, Integer> {
+public interface ProductRepository extends JpaRepository<Product, Long> {
 
     //TODO Определиться с методом поиска продукта
     List<Product> findByTitleStartingWith(String title);
