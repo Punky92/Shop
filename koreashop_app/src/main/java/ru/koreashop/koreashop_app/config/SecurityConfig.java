@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -28,7 +29,7 @@ public class SecurityConfig {
 //TODO Корректно настроить доступы по ролям (уменьшить код)
         http
                 .authorizeHttpRequests() //Настройка авторизации
-                .requestMatchers("/prod/new", "/prod/{id}/edit").hasRole("ADMIN") // На данные страницы могут войти только пользователи с ролью ADMIN
+                .requestMatchers("/prod/new", "/prod/{id}/edit", "/admin/**").hasRole("ADMIN") // На данные страницы могут войти только пользователи с ролью ADMIN
                 .requestMatchers("/prod/index", "/prod/{id}", "/prod/search", "/images/**", "/css/**", "/auth/login", "/auth/registration", "/error").permitAll() //Запросы доступные для любого пользователя
                 .anyRequest().hasAnyRole("USER", "ADMIN")//Остальные запросы доступны только для этих ролей
                 .and()

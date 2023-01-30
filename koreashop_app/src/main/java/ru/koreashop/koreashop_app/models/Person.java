@@ -4,6 +4,10 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
+import ru.koreashop.koreashop_app.models.enums.Role;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "people")
@@ -14,8 +18,11 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "role")
-    private String role;
+    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "user_role",
+    joinColumns = @JoinColumn(name = "user_id"))
+    @Enumerated(EnumType.STRING)
+    private Set<Role> roles = new HashSet<>();
 
     @NotEmpty(message = "Поле email не должно быть пустым")
     @Email(message = "Email адрес указан не корректно")
@@ -26,6 +33,9 @@ public class Person {
     @Size(min = 6, message = "Пароль должен содержать не менее 6 символов")
     @Column(name = "password")
     private String password;
+
+    @Column(name = "active")
+    private boolean active;
 
     @Size(min = 2, max = 30, message = "Имя должно быть от 2 до 30 символов длинной")
     @Column(name = "name")
@@ -72,14 +82,6 @@ public class Person {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
     }
 
     public String getEmail() {
@@ -152,5 +154,21 @@ public class Person {
 
     public void setCart(Cart cart) {
         this.cart = cart;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

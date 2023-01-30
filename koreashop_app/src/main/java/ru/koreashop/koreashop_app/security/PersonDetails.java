@@ -1,12 +1,10 @@
 package ru.koreashop.koreashop_app.security;
 
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import ru.koreashop.koreashop_app.models.Person;
 
 import java.util.Collection;
-import java.util.Collections;
 
 // Класс-обёртка над оригинальной моделью, для взаимодействий с Security
 public class PersonDetails implements UserDetails {
@@ -19,7 +17,7 @@ public class PersonDetails implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singletonList(new SimpleGrantedAuthority(person.getRole()));
+        return person.getRoles();
     }
 
     @Override
@@ -49,7 +47,7 @@ public class PersonDetails implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return person.isActive();
     }
 
     //Нужен, чтобы получать данные аутентифицированного пользователя

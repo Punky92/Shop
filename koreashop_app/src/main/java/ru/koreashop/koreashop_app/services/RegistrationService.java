@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.koreashop.koreashop_app.models.Cart;
 import ru.koreashop.koreashop_app.models.Person;
+import ru.koreashop.koreashop_app.models.enums.Role;
 import ru.koreashop.koreashop_app.repositories.CartRepository;
 import ru.koreashop.koreashop_app.repositories.PeopleRepository;
 
@@ -27,7 +28,8 @@ public class RegistrationService {
     public void register(Person person) {
         String encodedPassword = passwordEncoder.encode(person.getPassword()); // шифруем пароль
         person.setPassword(encodedPassword); //обновляем пароль
-        person.setRole("ROLE_USER");
+        person.getRoles().add(Role.ROLE_USER);
+        person.setActive(true);
         Cart cart = new Cart();
         peopleRepository.save(person);
         cart.setId(person.getId());
